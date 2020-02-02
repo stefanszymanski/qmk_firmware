@@ -31,14 +31,14 @@ enum Layers {
 #define _LSFT MO(sft_l)
 #define _RSFT MO(sft_r)
 
-#define _A LSFT_T(DE_A)
-#define _O LT(nav_l, DE_O)
-#define _E LT(num_l, DE_E)
-#define _U LT(sym_l, DE_U)
-#define _H LT(sym_r, DE_H)
-#define _T LT(num_r, DE_T)
-#define _N LT(nav_r, DE_N)
-#define _S RSFT_T(DE_S)
+#define _SFT_UE LSFT_T(DE_UE)
+#define _NAV_Q LT(nav_l, DE_Q)
+#define _NUM_J LT(num_l, DE_J)
+#define _SYM_K LT(sym_l, DE_K)
+#define _SYM_M LT(sym_r, DE_M)
+#define _NUM_W LT(num_r, DE_W)
+#define _NAV_V LT(nav_r, DE_V)
+#define _SFT_Z RSFT_T(DE_Z)
 
 #define _ESC LGUI_T(KC_ESC)
 #define _DEL LALT_T(KC_DEL)
@@ -65,9 +65,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |        | ' "    | , ;    | . :    | P      | Y      | F      | G      | C      | R      | L      | ß      |
  * |-----------------------------------------------------------------------------------------------------------|
  * | Ä      | A      | O      | E      | U      | I      | D      | H      | T      | N      | S      | - _    |
- * |        | SHIFT  | NAV    | NUM    | SYMBOL |        |        | SYMBOL | NUM    | NAV    | SHIFT  |        |
  * |-----------------------------------------------------------------------------------------------------------|
  * | Ö      | Ü      | Q      | J      | K      | X      | B      | M      | W      | V      | Z      | / \    |
+ * |        | SHIFT  | NAV    | NUM    | SYMBOL |        |        | SYMBOL | NUM    | NAV    | SHIFT  |        |
  * |-----------------------------------------------------------------------------------------------------------|
  * |        |        |        | Esc    | Bkspc  | Delete | Enter  | Space  | Tab    | Menu   |        |        |
  * |        |        | HYPER  | LGUI   | LCTRL  | ALT    | ALTGR  | RCTRL  | RGUI   | MEH    |        |        |
@@ -75,8 +75,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [dv] = LAYOUT_ortho_4x12 (
     XXXXXXX, _QUOTE,  DE_COMM, DE_DOT,  DE_P,    DE_Y,    DE_F,    DE_G,    DE_C,    DE_R,    DE_L,    DE_SS,
-    DE_AE,   _A,      _O,      _E,      _U,      DE_I,    DE_D,    _H,      _T,      _N,      _S,      DE_MINS,
-    DE_OE,   DE_UE,   DE_Q,    DE_J,    DE_K,    DE_X,    DE_B,    DE_M,    DE_W,    DE_V,    DE_Z,    _SLASH,
+    DE_AE,   DE_A,    DE_O,    DE_E,    DE_U,    DE_I,    DE_D,    DE_H,    DE_T,    DE_N,    DE_S,    DE_MINS,
+    DE_OE,   _SFT_UE, _NAV_Q,  _NUM_J,  _SYM_K,  DE_X,    DE_B,    _SYM_M,  _NUM_W,  _NAV_V,  _SFT_Z,  _SLASH,
     XXXXXXX, XXXXXXX, KC_CAPS, _ESC,    _BSPC,   _DEL,    _ENT,    _SPC,    _TAB,    _MENU,   XXXXXXX, XXXXXXX
 ),
 
@@ -94,14 +94,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [num_l] = LAYOUT_ortho_4x12 (
     XXXXXXX, XXXXXXX, KC_F7,   KC_F8,   KC_F9,   KC_F12,  DE_DOT,  DE_7,    DE_8,    DE_9,    DE_COMM, XXXXXXX,
-    XXXXXXX, XXXXXXX, KC_F4,   _______, KC_F6,   KC_F11,  DE_EQL,  DE_4,    DE_5,    DE_6,    DE_ASTR, _______,
-    XXXXXXX, XXXXXXX, KC_F1,   KC_F2,   KC_F3,   KC_F10,  DE_PLUS, DE_1,    DE_2,    DE_3,    DE_0,    _______,
+    XXXXXXX, XXXXXXX, KC_F4,   KC_F5,   KC_F6,   KC_F11,  DE_EQL,  DE_4,    DE_5,    DE_6,    DE_ASTR, _______,
+    XXXXXXX, XXXXXXX, KC_F1,   _______, KC_F3,   KC_F10,  DE_PLUS, DE_1,    DE_2,    DE_3,    DE_0,    _______,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 ),
 [num_r] = LAYOUT_ortho_4x12 (
     XXXXXXX, XXXXXXX, KC_F7,   KC_F8,   KC_F9,   KC_F12,  DE_DOT,  DE_7,    DE_8,    DE_9,    DE_COMM, DE_SLSH,
-    XXXXXXX, XXXXXXX, KC_F4,   KC_F5,   KC_F6,   KC_F11,  DE_EQL,  DE_4,    _______, DE_6,    DE_ASTR, DE_MINS,
-    XXXXXXX, XXXXXXX, KC_F1,   KC_F2,   KC_F3,   KC_F10,  DE_PLUS, DE_1,    DE_2,    DE_3,    DE_0,    XXXXXXX,
+    XXXXXXX, XXXXXXX, KC_F4,   KC_F5,   KC_F6,   KC_F11,  DE_EQL,  DE_4,    DE_5,    DE_6,    DE_ASTR, DE_MINS,
+    XXXXXXX, XXXXXXX, KC_F1,   KC_F2,   KC_F3,   KC_F10,  DE_PLUS, DE_1,    _______, DE_3,    DE_0,    XXXXXXX,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 ),
 
@@ -119,14 +119,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [nav_l] = LAYOUT_ortho_4x12 (
     XXXXXXX, KC_END,  KC_PGDN, KC_PGUP, KC_HOME, XXXXXXX, XXXXXXX, KC_MNXT, KC_MPRV, KC_MPLY, XXXXXXX, XXXXXXX,
-    XXXXXXX, KC_LEFT, _______, KC_UP,   KC_RGHT, XXXXXXX, XXXXXXX, KC_VOLU, KC_VOLD, KC_MUTE, XXXXXXX, XXXXXXX,
-    XXXXXXX, XXXXXXX, KC_PSCR, KC_PAUS, KC_INS,  XXXXXXX, XXXXXXX, KC_BRIU, KC_BRID, XXXXXXX, XXXXXXX, XXXXXXX,
+    XXXXXXX, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX, XXXXXXX, KC_VOLU, KC_VOLD, KC_MUTE, XXXXXXX, XXXXXXX,
+    XXXXXXX, XXXXXXX, _______, KC_PAUS, KC_INS,  XXXXXXX, XXXXXXX, KC_BRIU, KC_BRID, XXXXXXX, XXXXXXX, XXXXXXX,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 ),
 [nav_r] = LAYOUT_ortho_4x12 (
     _______, KC_END,  KC_PGDN, KC_PGUP, KC_HOME, XXXXXXX, XXXXXXX, KC_MNXT, KC_MPRV, KC_MPLY, XXXXXXX, XXXXXXX,
-    _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX, XXXXXXX, KC_VOLU, KC_VOLD, _______, XXXXXXX, XXXXXXX,
-    XXXXXXX, XXXXXXX, KC_PSCR, KC_PAUS, KC_INS,  XXXXXXX, XXXXXXX, KC_BRIU, KC_BRID, XXXXXXX, XXXXXXX, XXXXXXX,
+    _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX, XXXXXXX, KC_VOLU, KC_VOLD, KC_MUTE, XXXXXXX, XXXXXXX,
+    XXXXXXX, XXXXXXX, KC_PSCR, KC_PAUS, KC_INS,  XXXXXXX, XXXXXXX, KC_BRIU, KC_BRID, _______, XXXXXXX, XXXXXXX,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 ),
 
@@ -146,14 +146,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [sym_l] = LAYOUT_ortho_4x12 (
     XXXXXXX, _DE_NEG, DE_RING, DE_PARA, DE_PERC, DE_GRV,  DE_LESS, DE_LCBR, DE_RCBR, DE_MORE, DE_PIPE, XXXXXXX,
-    XXXXXXX, DE_EURO, DE_CIRC, DE_QST,  _______, DE_ACUT, DE_EQL,  DE_LPRN, DE_RPRN, DE_AT,   DE_AMPR, XXXXXXX,
-    XXXXXXX, _DE_SQ1, DE_SQ2,  DE_SQ3,  _DE_QRT, _DE_HLF, DE_DLR,  DE_LBRC, DE_RBRC, DE_TILD, DE_HASH, XXXXXXX,
+    XXXXXXX, DE_EURO, DE_CIRC, DE_QST,  DE_EXLM, DE_ACUT, DE_EQL,  DE_LPRN, DE_RPRN, DE_AT,   DE_AMPR, XXXXXXX,
+    XXXXXXX, _DE_SQ1, DE_SQ2,  DE_SQ3,  _______, _DE_HLF, DE_DLR,  DE_LBRC, DE_RBRC, DE_TILD, DE_HASH, XXXXXXX,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 ),
 [sym_r] = LAYOUT_ortho_4x12 (
     XXXXXXX, _DE_NEG, DE_RING, DE_PARA, DE_PERC, DE_GRV,  DE_LESS, DE_LCBR, DE_RCBR, DE_MORE, DE_PIPE, XXXXXXX,
-    XXXXXXX, DE_EURO, DE_CIRC, DE_QST,  DE_EXLM, DE_ACUT, DE_EQL,  _______, DE_RPRN, DE_AT,   DE_AMPR, XXXXXXX,
-    XXXXXXX, _DE_SQ1, DE_SQ2,  DE_SQ3,  _DE_QRT, _DE_HLF, DE_DLR,  DE_LBRC, DE_RBRC, DE_TILD, DE_HASH, XXXXXXX,
+    XXXXXXX, DE_EURO, DE_CIRC, DE_QST,  DE_EXLM, DE_ACUT, DE_EQL,  DE_LPRN, DE_RPRN, DE_AT,   DE_AMPR, XXXXXXX,
+    XXXXXXX, _DE_SQ1, DE_SQ2,  DE_SQ3,  _DE_QRT, _DE_HLF, DE_DLR,  _______, DE_RBRC, DE_TILD, DE_HASH, XXXXXXX,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 )
 
