@@ -16,6 +16,7 @@
 
 #include QMK_KEYBOARD_H
 #include "keymap_german.h"
+#include "sendstring_german.h"
 
 enum Layers {
   dv,
@@ -77,7 +78,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX, _QUOTE,  DE_COMM, DE_DOT,  DE_P,    DE_Y,    DE_F,    DE_G,    DE_C,    DE_R,    DE_L,    DE_SS,
     DE_AE,   DE_A,    DE_O,    DE_E,    DE_U,    DE_I,    DE_D,    DE_H,    DE_T,    DE_N,    DE_S,    DE_MINS,
     DE_OE,   _SFT_UE, _NAV_Q,  _NUM_J,  _SYM_K,  DE_X,    DE_B,    _SYM_M,  _NUM_W,  _NAV_V,  _SFT_Z,  _SLASH,
-    XXXXXXX, XXXXXXX, KC_CAPS, _ESC,    _BSPC,   _DEL,    _ENT,    _SPC,    _TAB,    _MENU,   XXXXXXX, XXXXXXX
+    XXXXXXX, KC_LEAD, KC_CAPS, _ESC,    _BSPC,   _DEL,    _ENT,    _SPC,    _TAB,    _MENU,   KC_LEAD, XXXXXXX
 ),
 
 /* Numbers
@@ -194,4 +195,103 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
   }
   return true;
+}
+
+
+/* Applications
+ *   <spc>  super ctrl enter    tmux terminal
+ *   r      super r             prompt
+ *   .      super .             dmenu app launcher
+ *   ,      super ,             dmenu windows
+ *   -      super -             dmenu session actions
+ *   c      meta c              calendar popup
+ *   w      meta w              weather popup
+ *   x      meta x              close notifications
+ *
+ * Tags
+ *   tc     super c             create tag
+ *   td     super d             delete tag
+ *   tn     super n             rename tag
+ *
+ * Screenshots
+ *   xx     ctrl print          screenshot of selection
+ *   xc     shift print         screenshot of focused window
+ *   xf     print               screenshot of full screen
+ *
+ *
+ * TODO
+ *
+ * Screens
+ *   sh     super h             go to left screen
+ *   sl     super l             go to right screen
+ *
+ * Client
+ *   ch     meta h              go to left client
+ *   cl     meta l              go to right client
+ *   cj     meta j              go to upper client
+ *   ck     meta k              go to lower client
+ *
+ * Maximize client
+ * Minimize client
+ * Magnify client
+ * Fullscreen client
+ * Restore minimized clients
+ * Move to new tag
+ * Move to tag x
+ *
+ * Goto tag x
+  */
+LEADER_EXTERNS();
+void matrix_scan_user(void) {
+    LEADER_DICTIONARY() {
+        leading = false;
+        leader_end();
+
+        // open terminal with tmux
+        SEQ_ONE_KEY(KC_SPC) {
+            SEND_STRING(SS_LGUI(SS_LCTL(SS_TAP(X_ENT))));
+        }
+        // open prompt
+        SEQ_ONE_KEY(DE_R) {
+            SEND_STRING(SS_LGUI("r"));
+        }
+        // open app launcher
+        SEQ_ONE_KEY(DE_DOT) {
+            SEND_STRING(SS_LGUI("."));
+        }
+        // open window list
+        SEQ_ONE_KEY(DE_COMM) {
+            SEND_STRING(SS_LGUI(","));
+        }
+        // open session menu
+        SEQ_ONE_KEY(DE_MINS) {
+            SEND_STRING(SS_LGUI("-"));
+        }
+
+        // create tag
+        SEQ_TWO_KEYS(DE_T, DE_C) {
+            SEND_STRING(SS_LGUI("c"));
+        }
+        // delete tag
+        SEQ_TWO_KEYS(DE_T, DE_D) {
+            SEND_STRING(SS_LGUI("d"));
+        }
+        // rename tag
+        SEQ_TWO_KEYS(DE_T, DE_N) {
+            SEND_STRING(SS_LGUI("n"));
+        }
+
+        // screenshot of selection
+        SEQ_TWO_KEYS(DE_X, DE_X) {
+            SEND_STRING(SS_LCTL(SS_TAP(X_PSCR)));
+        }
+        // screenshot of focused window
+        SEQ_TWO_KEYS(DE_X, DE_C) {
+            SEND_STRING(SS_LSFT(SS_TAP(X_PSCR)));
+        }
+        // screenshot of full screen
+        SEQ_TWO_KEYS(DE_X, DE_F) {
+            SEND_STRING(SS_TAP(X_PSCR));
+        }
+    }
 }

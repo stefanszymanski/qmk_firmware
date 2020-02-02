@@ -5,3 +5,7 @@
 
 // Prevent mod tap keys triggering the hold when typing fast
 #define IGNORE_MOD_TAP_INTERRUPT
+
+// Leader key
+#define LEADER_TIMEOUT 400
+#define LEADER_PER_KEY_TIMING
